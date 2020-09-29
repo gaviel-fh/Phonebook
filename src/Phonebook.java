@@ -1,14 +1,23 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOError;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Phonebook {
-    private ArrayList<Contact> contacts = new ArrayList<>();
+    private ArrayList<Contact> contacts;
     Scanner sc = new Scanner(System.in);
+    boolean isRunning = true;
 
+    Phonebook() {}
+
+    Phonebook(String filePath) {
+        contacts = FileHandelingHelper.readContactsFromFile(filePath);
+        proceed();
+    }
 
     public void proceed() {
-        boolean isRunning = true;
-
         while(isRunning) {
             int userChoice = getUserChoice();
 
@@ -18,7 +27,8 @@ public class Phonebook {
                 case 3: addContact(); break;
                 case 4: findContactByName(); break;
                 case 5: deleteContactByExactName(); break;
-                case 7: isRunning = false; break;
+                case 6: FileHandelingHelper.generateHTMLFile("C:\\Users\\josef\\Documents\\contacts.html", contacts);break;
+                case 7: quit(); break;
                 default:
                     System.out.println("Invalid choice");
                     showOptions();
@@ -32,7 +42,7 @@ public class Phonebook {
         System.out.println("3. Add Contact");
         System.out.println("4. Search Contact");
         System.out.println("5. Delete Contact by name");
-        System.out.println("6. Edit Contact by name");
+        System.out.println("6. Generate Html File");
         System.out.println("7. quit");
     }
 
@@ -101,6 +111,11 @@ public class Phonebook {
         String name = sc.nextLine();
 
         deleteContactByExactName(name);
+    }
+
+    private void quit() {
+        FileHandelingHelper.writeContactsToFile("C:\\Users\\josef\\Documents\\data.txt", contacts);
+        this.isRunning = false;
     }
 
     private int getUserChoice() {
