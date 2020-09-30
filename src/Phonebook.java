@@ -8,12 +8,14 @@ import java.util.Scanner;
 public class Phonebook {
     private ArrayList<Contact> contacts;
     Scanner sc = new Scanner(System.in);
+    String filePath;
     boolean isRunning = true;
 
     Phonebook() {}
 
     Phonebook(String filePath) {
-        contacts = FileHandelingHelper.readContactsFromFile(filePath);
+        this.filePath = filePath;
+        contacts = FileHandelingHelper.readContactsFromFile(filePath + "data.txt");
         proceed();
     }
 
@@ -27,7 +29,7 @@ public class Phonebook {
                 case 3: addContact(); break;
                 case 4: findContactByName(); break;
                 case 5: deleteContactByExactName(); break;
-                case 6: FileHandelingHelper.generateHTMLFile("C:\\Users\\josef\\Documents\\contacts.html", contacts);break;
+                case 6: FileHandelingHelper.generateHTMLFile(filePath + "contacts.html", contacts);break;
                 case 7: quit(); break;
                 default:
                     System.out.println("Invalid choice");
@@ -114,7 +116,7 @@ public class Phonebook {
     }
 
     private void quit() {
-        FileHandelingHelper.writeContactsToFile("C:\\Users\\josef\\Documents\\data.txt", contacts);
+        FileHandelingHelper.writeContactsToFile(filePath + "data.txt", contacts);
         this.isRunning = false;
     }
 

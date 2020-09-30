@@ -11,6 +11,8 @@ public class FileHandelingHelper {
 
         try {
             File file = new File(filePath);
+            // create file if it doesn't exist
+            file.createNewFile();
             Scanner sc = new Scanner(file);
 
             while(sc.hasNextLine()) {
@@ -42,9 +44,13 @@ public class FileHandelingHelper {
 
     public static void generateHTMLFile(String filePath, ArrayList<Contact> contacts) {
         try {
+            File myFile = new File(filePath);
             FileWriter myWriter = new FileWriter(filePath);
             String content = generateHTMLContent(contacts);
 
+            // create file if it doesn't exist
+            myFile.createNewFile();
+            // write content to file
             myWriter.write(content);
             myWriter.close();
 
@@ -72,5 +78,9 @@ public class FileHandelingHelper {
         string.append("</table></body></html>");
 
         return string.toString();
+    }
+
+    private void createFile() {
+
     }
 }

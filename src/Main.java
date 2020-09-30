@@ -7,10 +7,10 @@ public class Main {
         // Testing Contact Class
 //        Contact newContact = new Contact("david raese", "+43 677 627489");
 //        String contactStringTest = newContact.toString();
-//        System.out.println(contactStringTest);
+//        System.out.println(contactStringTest)
 
         // Testing Phonebook class
-        Phonebook myPhonebook = new Phonebook("C:\\Users\\josef\\Documents\\data.txt");
+        Phonebook myPhonebook = new Phonebook("C:\\Users\\david\\Documents\\");
 //        myPhonebook.addContact(pers1);
 //        myPhonebook.addContact(pers2);
 //        myPhonebook.addContact(pers3);
